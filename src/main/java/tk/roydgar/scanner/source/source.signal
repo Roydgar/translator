@@ -1,5 +1,6 @@
 program myprog;
 const ident = +10#3;
+const ident1 = +10#33;
 
 begin
 end.

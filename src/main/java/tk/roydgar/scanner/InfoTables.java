@@ -12,7 +12,10 @@ public class InfoTables {
     private int idnLexCode   = 400;                             //code of the last inserted identifier token
     private int constLexCode = 500;                              //code of the last inserted constant token
     private int[] attributes;                                    //attributes table
+
+
     private String outputFileName;
+    private String errors;
 
     private List<Token> lexems = new ArrayList<>();
 
@@ -93,4 +96,12 @@ public class InfoTables {
     }
 
     public List<Token> getTokens() { return lexems; }
+
+    public String getErrors() {
+        return errors;
+    }
+
+    public void setErrors(String errors) {
+        this.errors = errors;
+    }
 }

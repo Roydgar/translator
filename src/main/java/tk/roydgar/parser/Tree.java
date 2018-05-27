@@ -13,6 +13,7 @@ public class Tree {
 
     private List<Node> tree = new ArrayList<>();
     private int declarationCounter;
+    private Map<String, String> declarations = new HashMap<>();
     private String outputFileName;
 
     class Node {
@@ -25,6 +26,9 @@ public class Tree {
         }
     }
 
+    public String getProcedureIdentifier() { return tree.get(5).name; }
+
+    public Map<String , String> getDeclarations() { return declarations; }
     public Tree(String outputFileName) {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
         tree.add(new Node(4, TreeNodeNames.PROGRAM));
@@ -58,6 +62,7 @@ public class Tree {
         tree.add(new Node(28, Delimiters.SEMICOLON));
 
         declarationCounter++;
+        declarations.put(identifier, value);
 
     }
 

@@ -120,7 +120,7 @@ public class Scanner {
             if (suppressListing)
                 writer = new FileWriter(listingFilePath);
 
-            System.err.println(errorMessages);
+            infoTables.setErrors(errorMessages.toString());
         } finally {
             writer.close();
             reader.close();
@@ -184,7 +184,7 @@ public class Scanner {
             lexCode = infoTables.getKeyTabLexCode(buffer.toString());
         else
         if (infoTables.idnTabSearch(buffer.toString()))
-            lexCode = infoTables.getIdnTabLexCode(buffer.toString());
+            processError(ErrorMessages.ERROR_REPEAT_IDENTIFIER);
         else
             lexCode = infoTables.idnTabForm(buffer.toString());
     }

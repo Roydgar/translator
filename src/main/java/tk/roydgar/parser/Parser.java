@@ -50,7 +50,7 @@ public class Parser {
     }
 
 
-    public void run() {
+    public Tree run() {
 
         scanNextToken();
         try {
@@ -65,6 +65,7 @@ public class Parser {
             System.out.println(errors);
         }
 
+        return tree;
     }
 
     private void programBlock() throws ParserErrorException{

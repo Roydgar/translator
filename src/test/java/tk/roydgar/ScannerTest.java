@@ -15,13 +15,15 @@ import static org.junit.Assert.assertTrue;
 
 public class ScannerTest {
 
-    private void printSourceFile(String fileName) throws IOException{
+    private void printSourceFile(String fileName){
         int lineCounter = 1;
         try (BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()))) {
             String s;
             while ((s = in.readLine()) != null) {
                 System.out.println((lineCounter++) + "\t" + s);
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
