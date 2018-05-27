@@ -1,0 +1,7 @@
+program program1as;
+(*******)
+
+BEGIN
+   Const 1ident1 = 10#110;
+   (***----***)
+END.

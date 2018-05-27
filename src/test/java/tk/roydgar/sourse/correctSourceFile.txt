@@ -1,0 +1,8 @@
+program program1as;
+(*******)
+
+BEGIN
+   Const ident1 = 10#110;
+   (***----***)
+   const ident2= -30;
+END.

@@ -1,0 +1,5 @@
+program myprog;
+const program = afds10;
+
+begin
+end.
