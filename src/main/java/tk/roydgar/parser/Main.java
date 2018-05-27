@@ -8,8 +8,9 @@ import java.io.IOException;
 public class Main {
     public static void main(String[] args){
         try {
+            System.out.println(new Scanner(Constants.SOURCE_FILE_NAME).run().getTokens());
             new Parser(new Scanner(Constants.SOURCE_FILE_NAME).run()).run();
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }

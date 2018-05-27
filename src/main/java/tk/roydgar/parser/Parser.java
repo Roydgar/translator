@@ -10,6 +10,10 @@ public class Parser {
     private List<InfoTables.Token> tokens;
     private int tokenCounter = 0;
     private InfoTables.Token currentToken;
+    private StringBuilder errors = new StringBuilder();
+
+    private Tree tree = new Tree();
+    private boolean errorOccured;
 
     private void scanNextToken() {
         if (tokenCounter < tokens.size()) {
@@ -21,7 +25,29 @@ public class Parser {
         this.tokens = infoTables.getTokens();
     }
 
+    private void skipStatement() {
+        if (currentToken.code == KeywordCodes.BEGIN) {
+            return;
+        }
+        System.out.println(currentToken);
+        while(currentToken.code != DelimitersCodes.SEMICOLON) {
+            scanNextToken();
+        }
+        System.out.println(currentToken);
+
+        scanNextToken();
+    }
+
+    private void error(String expected) throws ParserErrorException{
+        String errorMessage = String.format(ErrorMessages.FORMAT, expected, currentToken.name);
+        errors.append(errorMessage);
+        errorOccured = true;
+        throw new ParserErrorException();
+    }
+
+
     public void run() {
+
         scanNextToken();
         try {
             programBlock();
@@ -29,33 +55,22 @@ public class Parser {
             skipStatement();
         }
 
-        try {
-            declarations();
-        } catch (ParserErrorException e) {
-            skipStatement();
+        if (!errorOccured) {
+            tree.print();
+        } else {
+            System.out.println(errors);
         }
 
-        try {
-            block();
-        } catch (ParserErrorException e) { }
-    }
-
-    private void skipStatement() {
-        while(currentToken.code != DelimitersCodes.SEMICOLON) {
-            scanNextToken();
-        }
-        scanNextToken();
-    }
-
-    private void error(String expected) throws ParserErrorException{
-        System.out.format(ErrorMessages.FORMAT, expected, currentToken.name);
-        throw new ParserErrorException();
     }
 
     private void programBlock() throws ParserErrorException{
         program();
-        identifier();
+        String identifier = identifier();
         semicolon();
+        try {
+            block();
+        } catch (ParserErrorException e) { }
+        tree.setProgramIdentifier(identifier);
     }
 
     private void program() throws ParserErrorException{
@@ -66,12 +81,15 @@ public class Parser {
         }
     }
 
-    private void identifier() throws ParserErrorException{
+    private String identifier() throws ParserErrorException{
         if (currentToken.code >= IdentifierCodes.FROM && currentToken.code <= IdentifierCodes.TO) {
+            String identifier = currentToken.name;
             scanNextToken();
+            return identifier;
         } else {
             error(ErrorMessages.IDENTIFIER);
         }
+        return "";
     }
 
     private void semicolon() throws ParserErrorException{
@@ -89,14 +107,16 @@ public class Parser {
             return;
         }
 
-        identifier();
+        String identifier = identifier();
         equal();
-        unsignedConstant();
+        String constant = unsignedConstant();
         semicolon();
+
+        tree.addDeclaration(identifier, constant);
         declarations();
     }
 
-    private boolean constant() throws ParserErrorException{
+    private boolean constant(){
         if (currentToken.code == KeywordCodes.CONST) {
             scanNextToken();
             return true;
@@ -112,15 +132,23 @@ public class Parser {
         }
     }
 
-    private void unsignedConstant() throws ParserErrorException{
+    private String unsignedConstant() throws ParserErrorException{
         if (currentToken.code >= ConstantCodes.FROM && currentToken.code <= ConstantCodes.TO) {
+            String constant = currentToken.name;
             scanNextToken();
+            return constant;
         } else {
             error(ErrorMessages.UNSIGNED_CONSTANT);
         }
+        return "";
     }
 
     private void block() throws ParserErrorException{
+        try {
+            declarations();
+        } catch (ParserErrorException e) {
+            skipStatement();
+        }
         begin();
         end();
         dot();
@@ -148,6 +176,5 @@ public class Parser {
             error(ErrorMessages.DOT);
         }
     }
-
 
 }

@@ -1,5 +1,5 @@
 program myprog;
-const program = afds10;
+const ident = 10;
 
 begin
 end.

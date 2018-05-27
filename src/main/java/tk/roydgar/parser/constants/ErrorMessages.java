@@ -13,6 +13,4 @@ public interface ErrorMessages {
     String UNSIGNED_CONSTANT = "any constant";
 
     String FORMAT            = "Error: expected: '%s', actual: '%s'. ";
-    String EOF               = "Error: expected statements but EOF reached.";
-
 }
