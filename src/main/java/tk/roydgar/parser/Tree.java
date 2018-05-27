@@ -2,13 +2,18 @@ package tk.roydgar.parser;
 
 
 import tk.roydgar.parser.constants.TreeNodeNames;
+import tk.roydgar.scanner.constants.Delimiters;
+import tk.roydgar.scanner.constants.Keywords;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Tree {
 
     private List<Node> tree = new ArrayList<>();
     private int declarationCounter;
+    private String outputFileName;
 
     class Node {
         int prefix;
@@ -20,18 +25,19 @@ public class Tree {
         }
     }
 
-    public Tree() {
+    public Tree(String outputFileName) {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
         tree.add(new Node(4, TreeNodeNames.PROGRAM));
-        tree.add(new Node(8, "PROGRAM"));
+        tree.add(new Node(8, Keywords.PROGRAM.toUpperCase()));
         tree.add(new Node(8, TreeNodeNames.PROCEDURE_IDENTIFIER));
         tree.add(new Node(12, TreeNodeNames.IDENTIFIER));
         tree.add(new Node(16, ""));
-        tree.add(new Node(8, ";"));
+        tree.add(new Node(8, Delimiters.SEMICOLON));
         tree.add(new Node(8, TreeNodeNames.BLOCK));
 
         tree.add(new Node(12, TreeNodeNames.DECLARATIONS));
         tree.add(new Node(16, TreeNodeNames.CONSTANT_DECLARATION));
+        this.outputFileName = outputFileName;
     }
 
     public void setProgramIdentifier(String identifier) {
@@ -39,17 +45,17 @@ public class Tree {
     }
 
     public void addDeclaration(String identifier, String value) {
-        tree.add(new Node(20, "CONST"));
+        tree.add(new Node(20, Keywords.CONST.toUpperCase()));
         tree.add(new Node(20, TreeNodeNames.CONSTANT_DECLAR_LIST));
         tree.add(new Node(24, TreeNodeNames.CONSTANT_DECLARATION));
         tree.add(new Node(28, TreeNodeNames.CONSTANT_IDENTIFIER));
         tree.add(new Node(32, TreeNodeNames.IDENTIFIER));
         tree.add(new Node(36, identifier));
         tree.add(new Node(28, TreeNodeNames.PROCEDURE_IDENTIFIER));
-        tree.add(new Node(28, "="));
+        tree.add(new Node(28, Delimiters.EQUAL));
         tree.add(new Node(28, TreeNodeNames.CONSTANT));
         tree.add(new Node(32, value));
-        tree.add(new Node(28, ";"));
+        tree.add(new Node(28, Delimiters.SEMICOLON));
 
         declarationCounter++;
 
@@ -61,23 +67,35 @@ public class Tree {
             tree.add(new Node(20, TreeNodeNames.EMPTY));
 
         }
-        tree.add(new Node(12, "BEGIN"));
+        tree.add(new Node(12, Keywords.BEGIN.toUpperCase()));
         tree.add(new Node(12, TreeNodeNames.STATEMENT_LIST));
         tree.add(new Node(16, TreeNodeNames.EMPTY));
-        tree.add(new Node(12, "END"));
-        tree.add(new Node(8, "."));
+        tree.add(new Node(12, Keywords.END.toUpperCase()));
+        tree.add(new Node(8, Delimiters.DOT));
 
-        for (Node node : tree) {
-            printSpaces(node.prefix);
-            System.out.println(node.name);
+        try {
+            FileWriter writer = new FileWriter(outputFileName, true);
+            writer.append("\n").append("Tree:").append("\n");
+
+            for (Node node : tree) {
+                System.out.println(formSpaces(node.prefix) + node.name);
+
+                writer.append(formSpaces(node.prefix)).append(node.name).append("\n");
+            }
+            writer.flush();
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
 
     }
 
-    private void printSpaces(int count) {
+    private String formSpaces(int count) {
+        StringBuilder sb = new StringBuilder();
         for(int i = 0; i < count; i++) {
-            System.out.print(" ");
+            sb.append(" ");
         }
+        return sb.toString();
     }
 };
 

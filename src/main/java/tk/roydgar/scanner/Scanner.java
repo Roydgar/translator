@@ -49,6 +49,7 @@ public class Scanner {
     public Scanner(String filePath) throws IOException{
         reader = new BufferedReader(new FileReader(filePath));
         listingFilePath = filePath.replace(SOURCE_FILE_EXT, LISTING_FILE_EXT);
+        infoTables.setOutputFileName(filePath.replace(SOURCE_FILE_EXT, LISTING_FILE_EXT));
         writer = new FileWriter(listingFilePath);
     }
 

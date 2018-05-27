@@ -12,6 +12,7 @@ public class InfoTables {
     private int idnLexCode   = 400;                             //code of the last inserted identifier token
     private int constLexCode = 500;                              //code of the last inserted constant token
     private int[] attributes;                                    //attributes table
+    private String outputFileName;
 
     private List<Token> lexems = new ArrayList<>();
 
@@ -49,6 +50,14 @@ public class InfoTables {
         dmTab.put(':', 8);
         keyTab.put("program", 301); keyTab.put("begin", 302);
         keyTab.put("end", 303);     keyTab.put("const", 304);
+    }
+
+    public void setOutputFileName(String outputFileName) {
+        this.outputFileName = outputFileName;
+    }
+
+    public String getOutputFileName() {
+        return outputFileName;
     }
 
     public boolean keyTabSearch(String value)   { return keyTab.containsKey(value);   }

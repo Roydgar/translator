@@ -9,3 +9,31 @@
    4    1        302    begin
    5    1        303    end
    5    4          5    .
+
+Tree:
+<signal-program>
+    <program>
+        PROGRAM
+        <procedure-identifier>
+            <identifier>
+                myprog
+        ;
+        <block>
+            <declarations>
+                <constant-declaration>
+                    CONST
+                    <constant-declaration-list>
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    ident
+                            <procedure-identifier>
+                            =
+                            <constant>
+                                +10#3
+                            ;
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .

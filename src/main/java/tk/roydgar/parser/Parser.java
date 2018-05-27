@@ -16,7 +16,7 @@ public class Parser {
     private InfoTables.Token currentToken;
     private StringBuilder errors = new StringBuilder();
 
-    private Tree tree = new Tree();
+    private Tree tree;
     private boolean errorOccured;
 
     private void scanNextToken() {
@@ -27,6 +27,7 @@ public class Parser {
 
     public Parser(InfoTables infoTables) {
         this.tokens = infoTables.getTokens();
+        tree = new Tree(infoTables.getOutputFileName());
     }
 
     private void skipStatement() {

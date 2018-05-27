@@ -1,18 +1,18 @@
 package tk.roydgar.constants;
 
 public interface SourceFileNames {
-    String CORRECT                  = "src\\test\\java\\tk\\roydgar\\sourse\\correctSourceFile.txt";
-    String COMMENT_ERROR            = "src\\test\\java\\tk\\roydgar\\sourse\\commentErrorSourceFile.txt";
-    String IDENTIFIER_ERROR         = "src\\test\\java\\tk\\roydgar\\sourse\\identifierErrorSourceFile.txt";
-    String SYMBOL_ERROR             = "src\\test\\java\\tk\\roydgar\\sourse\\wrongSymbolSourceFile.txt";
-    String SEVERAL_ERRORS           = "src\\test\\java\\tk\\roydgar\\sourse\\severalErrorsSourceFile.txt";
-    String CONSTANT_ERROR           = "src\\test\\java\\tk\\roydgar\\sourse\\wrongConstantSourceFile.txt";
+    String CORRECT                  = "src\\test\\java\\tk\\roydgar\\sourse\\correctSourceFile.signal";
+    String COMMENT_ERROR            = "src\\test\\java\\tk\\roydgar\\sourse\\commentErrorSourceFile.signal";
+    String IDENTIFIER_ERROR         = "src\\test\\java\\tk\\roydgar\\sourse\\identifierErrorSourceFile.signal";
+    String SYMBOL_ERROR             = "src\\test\\java\\tk\\roydgar\\sourse\\wrongSymbolSourceFile.signal";
+    String SEVERAL_ERRORS           = "src\\test\\java\\tk\\roydgar\\sourse\\severalErrorsSourceFile.signal";
+    String CONSTANT_ERROR           = "src\\test\\java\\tk\\roydgar\\sourse\\wrongConstantSourceFile.signal";
 
 
-    String MISSING_KEYWORD          = "src\\test\\java\\tk\\roydgar\\sourse\\missingKeyword.txt";
-    String MISSING_SEMICOLON        = "src\\test\\java\\tk\\roydgar\\sourse\\missingSemicolon.txt";
-    String MISSING_DOT              = "src\\test\\java\\tk\\roydgar\\sourse\\missingDot.txt";
-    String MISSING_IDENTIFIER       = "src\\test\\java\\tk\\roydgar\\sourse\\missingIdentifier.txt";
-    String WRONG_KEYWORD            = "src\\test\\java\\tk\\roydgar\\sourse\\wrongKeyword.txt";
+    String MISSING_KEYWORD          = "src\\test\\java\\tk\\roydgar\\sourse\\missingKeyword.signal";
+    String MISSING_SEMICOLON        = "src\\test\\java\\tk\\roydgar\\sourse\\missingSemicolon.signal";
+    String MISSING_DOT              = "src\\test\\java\\tk\\roydgar\\sourse\\missingDot.signal";
+    String MISSING_IDENTIFIER       = "src\\test\\java\\tk\\roydgar\\sourse\\missingIdentifier.signal";
+    String WRONG_KEYWORD            = "src\\test\\java\\tk\\roydgar\\sourse\\wrongKeyword.signal";
 
 }
