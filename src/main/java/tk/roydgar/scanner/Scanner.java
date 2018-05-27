@@ -1,6 +1,7 @@
 package tk.roydgar.scanner;
 
 import tk.roydgar.scanner.constants.Constants;
+import tk.roydgar.scanner.constants.ErrorMessages;
 
 import java.io.*;
 import java.text.DateFormat;
@@ -49,6 +50,10 @@ public class Scanner {
         reader = new BufferedReader(new FileReader(filePath));
         listingFilePath = filePath.replace(SOURCE_FILE_EXT, LISTING_FILE_EXT);
         writer = new FileWriter(listingFilePath);
+    }
+
+    public String getErrorMessages() {
+        return errorMessages.toString();
     }
 
     private void processError(String error) throws IOException{
@@ -125,14 +130,14 @@ public class Scanner {
 
     private void processIncorrectSymbol() throws IOException {
         buffer.append((char)symbol.value);
-        processError(ERROR_WRONG_SYMBOL);
+        processError(ErrorMessages.ERROR_WRONG_SYMBOL);
         symbol = readChar();
     }
 
     private void processComment() throws IOException{
         symbol = readChar();
         if (symbol.value == EOF) {
-            processError(ERROR_EXPECTED_COMMENT);
+            processError(ErrorMessages.ERROR_EXPECTED_COMMENT);
         }
         else {
             if (symbol.value == SYMBOL_ASTERISK) {
@@ -146,14 +151,14 @@ public class Scanner {
                     }
 
                     if (symbol.value ==EOF) {
-                        processError(ERROR_EXPECTED_COMMENT_CLOSING );
+                        processError(ErrorMessages.ERROR_EXPECTED_COMMENT_CLOSING );
                         break;
                     } else {
                         symbol = readChar();
                     }
                 } while (symbol.value != SYMBOL_CLOSED_BRACKET);
             } else
-                processError(ERROR_WRONG_SYMBOL);
+                processError(ErrorMessages.ERROR_WRONG_SYMBOL);
             if (symbol.value == SYMBOL_CLOSED_BRACKET)
                 suppressOutput = true;
             symbol = readChar();
@@ -203,10 +208,10 @@ public class Scanner {
         }
 
         if (error)
-            processError(ERROR_WRONG_CONST_DEF);
+            processError(ErrorMessages.ERROR_WRONG_CONST_DEF);
 
         if (symbol.attr == ATTR_IDENTIFIER_KEYWORD)
-            processError(ERROR_WRONG_IDENTIFIER);
+            processError(ErrorMessages.ERROR_WRONG_IDENTIFIER);
 
         if (infoTables.constTabSearch(buffer.toString()))
             lexCode = infoTables.getConstTabLexCode(buffer.toString());
@@ -220,7 +225,7 @@ public class Scanner {
 
             if (symbol.value ==EOF) {
                 buffer = new StringBuilder();
-                processError(ERROR_EXPECTED_DATE_CLOSING);
+                processError(ErrorMessages.ERROR_EXPECTED_DATE_CLOSING);
                 return;
             } else {
                 symbol = readChar();
@@ -233,7 +238,7 @@ public class Scanner {
         try {
             formatter.parse(buffer.toString());
         } catch (ParseException e) {
-            processError(ERROR_WRONG_DATE_FORMAT);
+            processError(ErrorMessages.ERROR_WRONG_DATE_FORMAT);
         }
         if (infoTables.idnTabSearch(buffer.toString()))
             lexCode = infoTables.getIdnTabLexCode(buffer.toString());

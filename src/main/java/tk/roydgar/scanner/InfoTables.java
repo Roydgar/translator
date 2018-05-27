@@ -22,7 +22,7 @@ public class InfoTables {
         Arrays.fill(attributes, 8, 11, 0);
         attributes[32] = ATTR_WHITESPACE;
         attributes[13] = ATTR_WHITESPACE;
-        attributes[43] = ATTR_DELIMITER; attributes[45] = ATTR_DELIMITER;
+        attributes[43] = ATTR_CONST; attributes[45] = ATTR_CONST;
         attributes[59] = ATTR_DELIMITER; attributes[61] = ATTR_DELIMITER;
         attributes[60] = ATTR_DELIMITER; attributes[62] = ATTR_DELIMITER;
         attributes[35] = ATTR_DELIMITER; attributes[46] = ATTR_DELIMITER;

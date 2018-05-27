@@ -1,4 +1,4 @@
-package tk.roydgar.constants;
+package tk.roydgar.parser.constants;
 
 public interface ParserErrors {
     String expectedDot            = "expected: '.'";

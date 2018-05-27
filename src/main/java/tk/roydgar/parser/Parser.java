@@ -1,6 +1,10 @@
 package tk.roydgar.parser;
 
 import tk.roydgar.parser.constants.*;
+import tk.roydgar.parser.constants.ConstantCodes;
+import tk.roydgar.parser.constants.DelimitersCodes;
+import tk.roydgar.parser.constants.IdentifierCodes;
+import tk.roydgar.parser.constants.KeywordCodes;
 import tk.roydgar.scanner.InfoTables;
 
 import java.util.List;
@@ -54,11 +58,11 @@ public class Parser {
             skipStatement();
         }
 
-        /*if (!errorOccured) {
+        if (!errorOccured) {
             tree.print();
         } else {
             System.out.println(errors);
-        }*/
+        }
 
     }
 
@@ -180,7 +184,7 @@ public class Parser {
         return tree;
     }
 
-    public StringBuilder getErrors() {
-        return errors;
+    public String getErrors() {
+        return errors.toString();
     }
 }
