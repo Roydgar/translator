@@ -1,0 +1,5 @@
+program myprog;
+const  = 10;
+
+begin
+end.

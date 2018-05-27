@@ -1,0 +1,5 @@
+myprog;
+const ident = 10;
+
+begin
+end.
