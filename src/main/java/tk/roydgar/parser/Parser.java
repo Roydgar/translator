@@ -188,4 +188,7 @@ public class Parser {
     public String getErrors() {
         return errors.toString();
     }
+
+    class ParserErrorException extends Exception {
+    }
 }
