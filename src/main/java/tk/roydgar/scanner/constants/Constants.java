@@ -18,6 +18,8 @@ public interface Constants {
     int SYMBOL_ASTERISK         = '*';
     int SYMBOL_OPENED_BRACKET   = '(';
     int SYMBOL_CLOSED_BRACKET   = ')';
+    int SYMBOL_MINUS             = '-';
+    int SYMBOL_PLUS             = '+';
     int SYMBOL_OPENED_ANGLE_BRACKET   = '<';
     int SYMBOL_CLOSED_ANGLE_BRACKET   = '>';
 

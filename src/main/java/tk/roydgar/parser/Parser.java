@@ -29,11 +29,10 @@ public class Parser {
         if (currentToken.code == KeywordCodes.BEGIN) {
             return;
         }
-        System.out.println(currentToken);
+
         while(currentToken.code != DelimitersCodes.SEMICOLON) {
             scanNextToken();
         }
-        System.out.println(currentToken);
 
         scanNextToken();
     }
@@ -55,11 +54,11 @@ public class Parser {
             skipStatement();
         }
 
-        if (!errorOccured) {
+        /*if (!errorOccured) {
             tree.print();
         } else {
             System.out.println(errors);
-        }
+        }*/
 
     }
 
@@ -177,4 +176,11 @@ public class Parser {
         }
     }
 
+    public Tree getTree() {
+        return tree;
+    }
+
+    public StringBuilder getErrors() {
+        return errors;
+    }
 }

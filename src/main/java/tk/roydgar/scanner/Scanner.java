@@ -1,5 +1,7 @@
 package tk.roydgar.scanner;
 
+import tk.roydgar.scanner.constants.Constants;
+
 import java.io.*;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -189,7 +191,8 @@ public class Scanner {
             processDate();
             return;
         }
-        while (symbol.value != EOF && symbol.attr == ATTR_CONST || symbol.value == SYMBOL_SHARP) {
+        while (symbol.value != EOF && symbol.attr == ATTR_CONST || symbol.value == SYMBOL_SHARP
+                || symbol.value == Constants.SYMBOL_MINUS ||  symbol.value == Constants.SYMBOL_PLUS) {
             buffer.append((char)symbol.value);
             symbol = readChar();
             if ((char)symbol.value == SYMBOL_SHARP) {

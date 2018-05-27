@@ -5,7 +5,7 @@ import tk.roydgar.parser.constants.TreeNodeNames;
 
 import java.util.*;
 
-class Tree {
+public class Tree {
 
     private List<Node> tree = new ArrayList<>();
     private int declarationCounter;
@@ -20,7 +20,7 @@ class Tree {
         }
     }
 
-    Tree() {
+    public Tree() {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
         tree.add(new Node(4, TreeNodeNames.PROGRAM));
         tree.add(new Node(8, "PROGRAM"));

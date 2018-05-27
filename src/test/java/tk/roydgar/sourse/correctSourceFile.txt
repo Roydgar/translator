@@ -1,8 +1,10 @@
 program program1as;
 (*******)
 
-BEGIN
-   Const ident1 = 10#110;
+Const ident1 = 10#-110;
    (***----***)
-   const ident2= -30;
+const ident2= 30;
+
+BEGIN
+
 END.
