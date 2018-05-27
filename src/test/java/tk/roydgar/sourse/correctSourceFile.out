@@ -53,3 +53,47 @@ Tree:
                 <empty>
             END
         .
+
+Tree:
+<signal-program>
+    <program>
+        PROGRAM
+        <procedure-identifier>
+            <identifier>
+                program1as
+        ;
+        <block>
+            <declarations>
+                <constant-declaration>
+                    CONST
+                    <constant-declaration-list>
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    ident1
+                            <procedure-identifier>
+                            =
+                            <constant>
+                                10#-110
+                            ;
+                    CONST
+                    <constant-declaration-list>
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    ident2
+                            <procedure-identifier>
+                            =
+                            <constant>
+                                30
+                            ;
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .

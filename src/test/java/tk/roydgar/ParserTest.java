@@ -1,6 +1,7 @@
 package tk.roydgar;
 
 import org.junit.Test;
+import tk.roydgar.parser.Tree;
 import tk.roydgar.parser.constants.ParserErrors;
 import tk.roydgar.constants.SourceFileNames;
 import tk.roydgar.parser.Parser;
@@ -26,8 +27,8 @@ public class ParserTest {
     public void testCorrectSourceFile() {
         Parser parser = createParser(SourceFileNames.CORRECT);
 
-        //Tree tree = parser.getTree();
-        //tree.print();
+        Tree tree = parser.getTree();
+        tree.print();
 
         assertTrue(parser.getErrors().isEmpty());
     }
