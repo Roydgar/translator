@@ -64,7 +64,7 @@ public class ParserTestWithOutput {
     public void testWrongKeyword() {
         InfoTables tables = runParser(SourceFileNames.WRONG_KEYWORD);
 
-        FileUtil.printSourceFile(SourceFileNames.MISSING_KEYWORD);
+        FileUtil.printSourceFile(SourceFileNames.WRONG_KEYWORD);
         System.out.println(tables.getParserErrors());
 
         assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedProgramKeyword));
