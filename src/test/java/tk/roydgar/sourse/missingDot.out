@@ -8,31 +8,3 @@
    2   17          3    ;
    4    1        302    begin
    5    1        303    end
-
-Tree:
-<signal-program>
-    <program>
-        PROGRAM
-        <procedure-identifier>
-            <identifier>
-                myprog
-        ;
-        <block>
-            <declarations>
-                <constant-declaration>
-                    CONST
-                    <constant-declaration-list>
-                        <constant-declaration>
-                            <constant-identifier>
-                                <identifier>
-                                    ident
-                            <procedure-identifier>
-                            =
-                            <constant>
-                                10
-                            ;
-            BEGIN
-            <statement-list>
-                <empty>
-            END
-        .

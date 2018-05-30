@@ -1,7 +1,8 @@
 program myprog;
 
 (*****COMMENT*****)
-const height = +10#3; width = 30#3;
+const height = 10#+3; width = 30#3;
 
 begin
-end .
+
+end.

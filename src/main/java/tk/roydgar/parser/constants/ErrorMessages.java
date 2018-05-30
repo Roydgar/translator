@@ -10,6 +10,7 @@ public interface ErrorMessages {
     String EQUAL             = "=";
     String CONST             = "const";
     String IDENTIFIER        = "any identifier";
+    String IDENTIDIER_OR_BEG = "any identifier or begin";
     String UNSIGNED_CONSTANT = "any constant";
 
     String FORMAT            = "Parser error: expected: '%s', actual: '%s'.\n";

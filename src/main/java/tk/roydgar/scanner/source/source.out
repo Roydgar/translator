@@ -4,15 +4,15 @@
    4    1        304    const
    4    7        402    height
    4   14          0    =
-   4   16        501    +10#3
+   4   16        501    10#+3
    4   21          3    ;
    4   23        403    width
    4   29          0    =
    4   31        502    30#3
    4   35          3    ;
    6    1        302    begin
-   7    1        303    end
-   7    5          5    .
+   8    1        303    end
+   8    4          5    .
 
 Tree:
 <signal-program>
@@ -34,7 +34,7 @@ Tree:
                             <procedure-identifier>
                             =
                             <constant>
-                                +10#3
+                                10#+3
                             ;
                     CONST
                     <constant-declaration-list>

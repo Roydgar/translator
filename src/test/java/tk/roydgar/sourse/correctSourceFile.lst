@@ -3,8 +3,8 @@
 
 data SEGMENT
 
-ident1	EQU	10#-110
-ident2	EQU	30
+ident1	EQU	'10#-110'
+ident2	EQU	'30'
 
 data ENDS
 

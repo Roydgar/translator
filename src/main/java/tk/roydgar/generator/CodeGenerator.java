@@ -7,6 +7,8 @@ import tk.roydgar.scanner.constants.Constants;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Map;
 
 public class CodeGenerator {
@@ -32,7 +34,8 @@ public class CodeGenerator {
             writer.append(ListingConstants.DATA_SEGMENT);
 
             for (Map.Entry<String, String> declaration : tree.getDeclarations().entrySet()) {
-                writer.append(String.format(ListingConstants.DECLARATION, declaration.getKey(), declaration.getValue()));
+                writer.append(String.format(ListingConstants.DECLARATION, declaration.getKey(),
+                       declaration.getValue()));
             }
             writer.append("\n");
 
@@ -43,6 +46,5 @@ public class CodeGenerator {
             writer.close();
         }
     }
-
 
 }

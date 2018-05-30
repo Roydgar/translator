@@ -15,7 +15,6 @@ public class Tree {
     private int declarationCounter;
     private Map<String, String> declarations = new LinkedHashMap<>();
     private String outputFileName;
-    private boolean isEmpty = true;
 
     class Node {
         int prefix;
@@ -80,7 +79,6 @@ public class Tree {
         tree.add(new Node(16, TreeNodeNames.EMPTY));
         tree.add(new Node(12, Keywords.END.toUpperCase()));
         tree.add(new Node(8, Delimiters.DOT));
-        isEmpty = false;
 
         try {
             FileWriter writer = new FileWriter(outputFileName, true);
@@ -110,7 +108,7 @@ public class Tree {
         return sb.toString();
     }
 
-    public boolean isEmpty() { return isEmpty; }
+    public boolean isEmpty() { return tree.isEmpty(); }
 };
 
 

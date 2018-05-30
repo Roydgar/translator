@@ -49,7 +49,7 @@ public class Scanner {
     public Scanner(String filePath) throws IOException{
         reader = new BufferedReader(new FileReader(filePath));
         listingFilePath = filePath.replace(SOURCE_FILE_EXT, LISTING_FILE_EXT);
-        infoTables.setOutputFileName(filePath.replace(SOURCE_FILE_EXT, LISTING_FILE_EXT));
+        infoTables.setOutputFileName(listingFilePath);
         writer = new FileWriter(listingFilePath);
     }
 
@@ -192,19 +192,45 @@ public class Scanner {
     private void processConstant() throws IOException{
         boolean checkSharp = false;
         boolean error      = false;
+        boolean checkSigns = (char)symbol.value == SYMBOL_MINUS || symbol.value == SYMBOL_PLUS;
+        boolean checkDigit = Character.isDigit(symbol.attr);
 
         if (date) {
             processDate();
             return;
         }
+
         while (symbol.value != EOF && symbol.attr == ATTR_CONST || symbol.value == SYMBOL_SHARP
-                || symbol.value == Constants.SYMBOL_MINUS ||  symbol.value == Constants.SYMBOL_PLUS) {
+                || symbol.value == SYMBOL_MINUS ||  symbol.value == SYMBOL_PLUS) {
             buffer.append((char)symbol.value);
             symbol = readChar();
             if ((char)symbol.value == SYMBOL_SHARP) {
-                if (checkSharp)
+                if (checkSharp) {
                     error = true;
+                }
                 checkSharp = true;
+                checkSigns = false;
+                checkDigit = false;
+            }
+
+            if (! checkDigit && Character.isDigit(symbol.value)) {
+                checkDigit = true;
+            }
+
+            if (checkSigns  && !checkDigit){
+                System.out.println(symbol);
+                error = true;
+            }
+
+            if ((char)symbol.value == SYMBOL_MINUS || (char)symbol.value == SYMBOL_PLUS) {
+                if (checkSigns) {
+                    error = true;
+                } else {
+                   if (checkDigit) {
+                       error = true;
+                   }
+                }
+                checkSigns = true;
             }
         }
 

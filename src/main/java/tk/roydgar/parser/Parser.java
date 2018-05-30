@@ -33,17 +33,6 @@ public class Parser {
         tree = new Tree(infoTables.getOutputFileName());
     }
 
-    private void skipStatement() {
-        if (currentToken.code == KeywordCodes.BEGIN) {
-            return;
-        }
-
-        while(currentToken.code != DelimitersCodes.SEMICOLON) {
-            scanNextToken();
-        }
-
-        scanNextToken();
-    }
 
     private void error(String expected) throws ParserErrorException{
         String errorMessage = String.format(ErrorMessages.FORMAT, expected, currentToken.name);
@@ -59,16 +48,12 @@ public class Parser {
         try {
             programBlock();
         } catch (ParserErrorException e) {
-            skipStatement();
-        }
-        tree.addTail();
-
-        infoTables.setParserErrors(errors.toString());
-
-        if (!errors.toString().isEmpty()) {
             tree = new Tree();
+            infoTables.setParserErrors(errors.toString());
+            return infoTables;
         }
 
+        tree.addTail();
         infoTables.setParserTree(tree);
 
         return infoTables;
@@ -78,9 +63,8 @@ public class Parser {
         program();
         String identifier = identifier();
         semicolon();
-        try {
-            block();
-        } catch (ParserErrorException e) { }
+
+        block();
         tree.setProgramIdentifier(identifier);
     }
 
@@ -112,9 +96,19 @@ public class Parser {
     }
 
     private void declarations() throws ParserErrorException{
-        constant();
+        boolean present = constKeyword();
+        if (! present) {
+            return;
+        }
         constantDeclarationList();
+    }
 
+    private boolean constKeyword() throws ParserErrorException{
+        if (currentToken.code == KeywordCodes.CONST) {
+            scanNextToken();
+            return true;
+        }
+        return false;
     }
 
     private void constantDeclarationList() throws ParserErrorException {
@@ -133,12 +127,6 @@ public class Parser {
 
         tree.addDeclaration(identifier, constant);
         constantDeclaration();
-    }
-
-    private void constant(){
-        if (currentToken.code == KeywordCodes.CONST) {
-            scanNextToken();
-        }
     }
 
     private void equal() throws ParserErrorException{
@@ -161,11 +149,7 @@ public class Parser {
     }
 
     private void block() throws ParserErrorException{
-        try {
-            declarations();
-        } catch (ParserErrorException e) {
-            skipStatement();
-        }
+        declarations();
         begin();
         end();
         dot();
