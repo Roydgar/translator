@@ -120,7 +120,7 @@ public class Scanner {
             if (suppressListing)
                 writer = new FileWriter(listingFilePath);
 
-            infoTables.setErrors(errorMessages.toString());
+            infoTables.setScannerErrors(errorMessages.toString());
         } finally {
             writer.close();
             reader.close();

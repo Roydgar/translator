@@ -2,6 +2,7 @@ package tk.roydgar.generator;
 
 import tk.roydgar.generator.constants.ListingConstants;
 import tk.roydgar.parser.Tree;
+import tk.roydgar.scanner.InfoTables;
 import tk.roydgar.scanner.constants.Constants;
 
 import java.io.FileWriter;
@@ -14,9 +15,14 @@ public class CodeGenerator {
 
     String listingFileName;
 
-    public CodeGenerator(Tree tree, String fileName){
-        this.tree = tree;
-        this.listingFileName = fileName.replaceAll(Constants.SOURCE_FILE_EXT, ListingConstants.LST_FILE_EXTENSION);
+    public CodeGenerator(InfoTables infoTables){
+        if (infoTables.getParserTree().isEmpty()) {
+            throw new GeneratorEmptyTreeException();
+        }
+
+        this.tree = infoTables.getParserTree();
+        this.listingFileName = infoTables.getOutputFileName().replaceAll(Constants.LISTING_FILE_EXT,
+                ListingConstants.LST_FILE_EXTENSION);
     }
 
     public void run() throws IOException{

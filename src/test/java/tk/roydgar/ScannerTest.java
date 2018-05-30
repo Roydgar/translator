@@ -12,29 +12,10 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
+import static tk.roydgar.util.CreatorUtil.createScanner;
+import static tk.roydgar.util.FileUtil.printSourceFile;
 
 public class ScannerTest {
-
-    private void printSourceFile(String fileName){
-        int lineCounter = 1;
-        try (BufferedReader in = new BufferedReader(new FileReader(new File(fileName).getAbsoluteFile()))) {
-            String s;
-            while ((s = in.readLine()) != null) {
-                System.out.println((lineCounter++) + "\t" + s);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Scanner createScanner(String sourceFileName) {
-        try {
-            printSourceFile(SourceFileNames.CORRECT);
-            Scanner scanner = new Scanner(sourceFileName);
-            scanner.run();
-            return scanner;
-        } catch (IOException e) { throw new RuntimeException(e); }
-    }
 
     @Test
     public void correctSourceTest() {

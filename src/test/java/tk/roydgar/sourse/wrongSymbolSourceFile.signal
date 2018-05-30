@@ -1,8 +1,9 @@
 program program1as;
 (*******)
 
+Const ident1 = 10#110;
+
 BEGIN
-   Const ident1 = 10#110;
    (***----***)
    *
 END.

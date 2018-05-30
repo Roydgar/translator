@@ -10,34 +10,25 @@ import java.io.IOException;
 
 public class Translator {
 
-    private String sourceFileName;
-
-    public Translator(String filename) {
-        this.sourceFileName = filename;
-    }
-
-    public void run() throws IOException {
+    public void run(String sourceFileName) throws IOException {
         InfoTables infoTables = new Scanner(sourceFileName).run();
 
-        if (!infoTables.getErrors().isEmpty()) {
-            System.err.println(infoTables.getErrors());
-            return;
+        if (!infoTables.getScannerErrors().isEmpty()) {
+            throw new TranslatorException(infoTables.getScannerErrors());
         }
 
-        Parser parser = new Parser(infoTables);
-        parser.run();
+        new Parser(infoTables).run();
 
-        if (!parser.getErrors().isEmpty()) {
-            System.err.println(parser.getErrors());
-            return;
+        if (!infoTables.getParserErrors().isEmpty()) {
+            throw new TranslatorException(infoTables.getParserErrors());
         }
 
-        new CodeGenerator(parser.getTree(), Constants.SOURCE_FILE_NAME).run();
+        new CodeGenerator(infoTables).run();
     }
 
     public static void main(String[] args){
         try {
-            new Translator(Constants.SOURCE_FILE_NAME).run();
+            new Translator().run(Constants.SOURCE_FILE_NAME);
         } catch (IOException fileNotFound) {
             fileNotFound.printStackTrace();
         }

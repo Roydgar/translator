@@ -1,5 +1,7 @@
 package tk.roydgar.scanner;
 
+import tk.roydgar.parser.Tree;
+
 import java.util.*;
 
 import static tk.roydgar.scanner.constants.Constants.*;
@@ -15,7 +17,9 @@ public class InfoTables {
 
 
     private String outputFileName;
-    private String errors;
+    private String scannerErrors = "";
+    private String parserErrors = "";
+    private Tree parserTree = new Tree();
 
     private List<Token> lexems = new ArrayList<>();
 
@@ -74,6 +78,13 @@ public class InfoTables {
     public int idnTabForm(String value)         { idnTab.put(value, ++idnLexCode);       return idnLexCode;    }
     public int constTabForm(String value)       { constTab.put(value, ++constLexCode);   return constLexCode;  }
 
+    public Map<String, Integer> getIdnTab() {
+        return idnTab;
+    }
+
+    public Map<String, Integer> getConstTab() {
+        return constTab;
+    }
 
     public static class Token {
         public String name;
@@ -97,11 +108,27 @@ public class InfoTables {
 
     public List<Token> getTokens() { return lexems; }
 
-    public String getErrors() {
-        return errors;
+    public String getScannerErrors() {
+        return scannerErrors;
     }
 
-    public void setErrors(String errors) {
-        this.errors = errors;
+    public void setScannerErrors(String scannerErrors) {
+        this.scannerErrors = scannerErrors;
+    }
+
+    public String getParserErrors() {
+        return parserErrors;
+    }
+
+    public void setParserErrors(String parserErrors) {
+        this.parserErrors = parserErrors;
+    }
+
+    public Tree getParserTree() {
+        return parserTree;
+    }
+
+    public void setParserTree(Tree parserTree) {
+        this.parserTree = parserTree;
     }
 }

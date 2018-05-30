@@ -6,29 +6,22 @@ import tk.roydgar.parser.constants.ParserErrors;
 import tk.roydgar.constants.SourceFileNames;
 import tk.roydgar.parser.Parser;
 import tk.roydgar.scanner.Scanner;
+
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
 import static org.junit.Assert.assertTrue;
+import static tk.roydgar.util.CreatorUtil.createParser;
 
 
 public class ParserTest {
 
-    private Parser createParser(String sourceFileName) {
-        try {
-            Parser parser = new Parser(new Scanner(sourceFileName).run());
-            parser.run();
-            return parser;
-        } catch (IOException fileNotFound) {
-            throw new RuntimeException(fileNotFound);
-        }
-    }
 
     @Test
     public void testCorrectSourceFile() {
         Parser parser = createParser(SourceFileNames.CORRECT);
-
-        Tree tree = parser.getTree();
-        tree.print();
 
         assertTrue(parser.getErrors().isEmpty());
     }

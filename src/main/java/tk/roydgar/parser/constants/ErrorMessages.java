@@ -12,5 +12,5 @@ public interface ErrorMessages {
     String IDENTIFIER        = "any identifier";
     String UNSIGNED_CONSTANT = "any constant";
 
-    String FORMAT            = "Error: expected: '%s', actual: '%s'.\n";
+    String FORMAT            = "Parser error: expected: '%s', actual: '%s'.\n";
 }

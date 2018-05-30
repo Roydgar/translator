@@ -9,3 +9,21 @@
    4    1        302    begin
    5    1        303    end
    5    4          5    .
+
+Tree:
+<signal-program>
+    <program>
+        PROGRAM
+        <procedure-identifier>
+            <identifier>
+                
+        ;
+        <block>
+            <declarations>
+                <constant-declaration>
+                    <empty>
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .

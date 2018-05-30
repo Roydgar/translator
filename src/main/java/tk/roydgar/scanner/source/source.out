@@ -1,0 +1,54 @@
+   1    1        301    program
+   1    9        401    myprog
+   1   15          3    ;
+   4    1        304    const
+   4    7        402    height
+   4   14          0    =
+   4   16        501    +10#3
+   4   21          3    ;
+   4   23        403    width
+   4   29          0    =
+   4   31        502    30#3
+   4   35          3    ;
+   6    1        302    begin
+   7    1        303    end
+   7    5          5    .
+
+Tree:
+<signal-program>
+    <program>
+        PROGRAM
+        <procedure-identifier>
+            <identifier>
+                myprog
+        ;
+        <block>
+            <declarations>
+                <constant-declaration>
+                    CONST
+                    <constant-declaration-list>
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    height
+                            <procedure-identifier>
+                            =
+                            <constant>
+                                +10#3
+                            ;
+                    CONST
+                    <constant-declaration-list>
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    width
+                            <procedure-identifier>
+                            =
+                            <constant>
+                                30#3
+                            ;
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .

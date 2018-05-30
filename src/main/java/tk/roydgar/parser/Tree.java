@@ -13,8 +13,9 @@ public class Tree {
 
     private List<Node> tree = new ArrayList<>();
     private int declarationCounter;
-    private Map<String, String> declarations = new HashMap<>();
+    private Map<String, String> declarations = new LinkedHashMap<>();
     private String outputFileName;
+    private boolean isEmpty = true;
 
     class Node {
         int prefix;
@@ -29,6 +30,9 @@ public class Tree {
     public String getProcedureIdentifier() { return tree.get(5).name; }
 
     public Map<String , String> getDeclarations() { return declarations; }
+
+    public Tree() {};
+
     public Tree(String outputFileName) {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
         tree.add(new Node(4, TreeNodeNames.PROGRAM));
@@ -66,8 +70,7 @@ public class Tree {
 
     }
 
-
-    public void print() {
+    public void addTail() {
         if (declarationCounter == 0) {
             tree.add(new Node(20, TreeNodeNames.EMPTY));
 
@@ -77,14 +80,13 @@ public class Tree {
         tree.add(new Node(16, TreeNodeNames.EMPTY));
         tree.add(new Node(12, Keywords.END.toUpperCase()));
         tree.add(new Node(8, Delimiters.DOT));
+        isEmpty = false;
 
         try {
             FileWriter writer = new FileWriter(outputFileName, true);
             writer.append("\n").append("Tree:").append("\n");
 
             for (Node node : tree) {
-                System.out.println(formSpaces(node.prefix) + node.name);
-
                 writer.append(formSpaces(node.prefix)).append(node.name).append("\n");
             }
             writer.flush();
@@ -92,7 +94,12 @@ public class Tree {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
 
+    public void print() {
+        for (Node node : tree) {
+            System.out.println(formSpaces(node.prefix) + node.name);
+        }
     }
 
     private String formSpaces(int count) {
@@ -102,6 +109,8 @@ public class Tree {
         }
         return sb.toString();
     }
+
+    public boolean isEmpty() { return isEmpty; }
 };
 
 

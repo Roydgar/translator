@@ -6,12 +6,14 @@ import tk.roydgar.parser.constants.DelimitersCodes;
 import tk.roydgar.parser.constants.IdentifierCodes;
 import tk.roydgar.parser.constants.KeywordCodes;
 import tk.roydgar.scanner.InfoTables;
+import tk.roydgar.scanner.constants.Keywords;
 
 import java.util.List;
 
 public class Parser {
 
     private List<InfoTables.Token> tokens;
+    private InfoTables infoTables;
     private int tokenCounter = 0;
     private InfoTables.Token currentToken;
     private StringBuilder errors = new StringBuilder();
@@ -27,6 +29,7 @@ public class Parser {
 
     public Parser(InfoTables infoTables) {
         this.tokens = infoTables.getTokens();
+        this.infoTables = infoTables;
         tree = new Tree(infoTables.getOutputFileName());
     }
 
@@ -50,7 +53,7 @@ public class Parser {
     }
 
 
-    public Tree run() {
+    public InfoTables run() {
 
         scanNextToken();
         try {
@@ -58,14 +61,17 @@ public class Parser {
         } catch (ParserErrorException e) {
             skipStatement();
         }
+        tree.addTail();
 
-        if (!errorOccured) {
-            tree.print();
-        } else {
-            System.out.println(errors);
+        infoTables.setParserErrors(errors.toString());
+
+        if (!errors.toString().isEmpty()) {
+            tree = new Tree();
         }
 
-        return tree;
+        infoTables.setParserTree(tree);
+
+        return infoTables;
     }
 
     private void programBlock() throws ParserErrorException{
@@ -106,9 +112,17 @@ public class Parser {
     }
 
     private void declarations() throws ParserErrorException{
-        boolean present = constant();
+        constant();
+        constantDeclarationList();
 
-        if (!present) {
+    }
+
+    private void constantDeclarationList() throws ParserErrorException {
+        constantDeclaration();
+    }
+
+    private void constantDeclaration() throws ParserErrorException {
+        if (currentToken.code == KeywordCodes.BEGIN) {
             return;
         }
 
@@ -118,15 +132,13 @@ public class Parser {
         semicolon();
 
         tree.addDeclaration(identifier, constant);
-        declarations();
+        constantDeclaration();
     }
 
-    private boolean constant(){
+    private void constant(){
         if (currentToken.code == KeywordCodes.CONST) {
             scanNextToken();
-            return true;
         }
-        return false;
     }
 
     private void equal() throws ParserErrorException{
