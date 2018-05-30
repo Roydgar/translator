@@ -15,7 +15,6 @@ public class Tree {
     private int declarationCounter;
     private Map<String, String> declarations = new LinkedHashMap<>();
     private String outputFileName;
-    private boolean isEmpty;
 
     class Node {
         int prefix;
@@ -31,7 +30,7 @@ public class Tree {
 
     public Map<String , String> getDeclarations() { return declarations; }
 
-    public Tree() {isEmpty = true; };
+    public Tree() {};
 
     public Tree(String outputFileName) {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
@@ -46,7 +45,6 @@ public class Tree {
         tree.add(new Node(12, TreeNodeNames.DECLARATIONS));
         tree.add(new Node(16, TreeNodeNames.CONSTANT_DECLARATIONS));
 
-        isEmpty = false;
         this.outputFileName = outputFileName;
     }
 
@@ -111,7 +109,11 @@ public class Tree {
         return sb.toString();
     }
 
-    public boolean isEmpty() { return isEmpty; }
+    public boolean isEmpty() { return tree.isEmpty(); }
+
+    public void clear() {
+        tree.clear();
+    }
 };
 
 

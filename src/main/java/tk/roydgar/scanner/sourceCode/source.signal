@@ -1,6 +1,6 @@
 program myprog;
 
 (*****COMMENT*****)
-
+const weight = 3#-5; height = 5#5;
 begin
 end.

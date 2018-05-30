@@ -20,7 +20,6 @@ public class Parser {
     private StringBuilder errors = new StringBuilder();
 
     private Tree tree;
-    private boolean errorOccured;
 
     private void scanNextToken() {
         if (tokenCounter < tokens.size()) {
@@ -37,10 +36,8 @@ public class Parser {
     private void error(String expected) {
         String errorMessage = String.format(ErrorMessages.FORMAT, expected, currentToken.name);
         errors.append(errorMessage);
-        errorOccured = true;
         throw new SyntaxErrorException();
     }
-
 
     public String getErrors() {
         return errors.toString();
@@ -52,7 +49,7 @@ public class Parser {
         try {
             signalProgram();
         } catch (SyntaxErrorException syntaxError) {
-            tree = new Tree();
+            tree.clear();
             infoTables.setParserErrors(errors.toString());
             return infoTables;
         }
