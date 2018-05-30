@@ -4,12 +4,16 @@
    4    1        304    const
    4    7        402    ident1
    4   14          0    =
-   4   16        501    10#-110
-   4   23          3    ;
-   4   25        403    ident2
-   4   31          0    =
-   4   33        502    30
-   4   35          3    ;
+   4   16        501    10#-2
+   4   21          3    ;
+   4   23        403    ident2
+   4   29          0    =
+   4   31        502    30
+   4   33          3    ;
+   4   36        404    ident3
+   4   42          0    =
+   4   44        503    -30#2
+   4   49          3    ;
    7    1        302    begin
    9    1        303    end
    9    4          5    .
@@ -24,28 +28,32 @@ Tree:
         ;
         <block>
             <declarations>
-                <constant-declaration>
+                <constant-declarations>
                     CONST
                     <constant-declaration-list>
                         <constant-declaration>
                             <constant-identifier>
                                 <identifier>
                                     ident1
-                            <procedure-identifier>
                             =
                             <constant>
-                                10#-110
+                                10#-2
                             ;
-                    CONST
-                    <constant-declaration-list>
                         <constant-declaration>
                             <constant-identifier>
                                 <identifier>
                                     ident2
-                            <procedure-identifier>
                             =
                             <constant>
                                 30
+                            ;
+                        <constant-declaration>
+                            <constant-identifier>
+                                <identifier>
+                                    ident3
+                            =
+                            <constant>
+                                -30#2
                             ;
             BEGIN
             <statement-list>

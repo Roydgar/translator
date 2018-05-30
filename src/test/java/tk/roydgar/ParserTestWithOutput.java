@@ -1,81 +1,72 @@
 package tk.roydgar;
 
 import org.junit.Test;
-import tk.roydgar.parser.Tree;
 import tk.roydgar.parser.constants.ParserErrors;
 import tk.roydgar.constants.SourceFileNames;
-import tk.roydgar.parser.Parser;
 import tk.roydgar.scanner.InfoTables;
-import tk.roydgar.scanner.Scanner;
 import tk.roydgar.util.FileUtil;
 
-import java.io.IOException;
-
 import static org.junit.Assert.assertTrue;
-import static tk.roydgar.util.CreatorUtil.createParser;
+import static tk.roydgar.util.CreatorUtil.runParser;
 
 
 public class ParserTestWithOutput {
 
-
-
     @Test
     public void testCorrectSourceFile() {
-        Parser parser = createParser(SourceFileNames.CORRECT);
+        InfoTables tables = runParser(SourceFileNames.CORRECT);
 
         FileUtil.printSourceFile(SourceFileNames.CORRECT);
-        parser.getTree().print();
-
-        assertTrue(parser.getErrors().isEmpty());
+        assertTrue(tables.getParserErrors().isEmpty());
     }
 
     @Test
     public void testMissingDot() {
-        Parser parser = createParser(SourceFileNames.MISSING_DOT);
+        InfoTables tables = runParser(SourceFileNames.MISSING_DOT);
 
         FileUtil.printSourceFile(SourceFileNames.MISSING_DOT);
-        System.out.println(parser.getErrors());
+        System.out.println(tables.getParserErrors());
 
-        assertTrue(parser.getErrors().contains(ParserErrors.expectedDot));
+        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedDot));
     }
 
     @Test
     public void testMissingIdentifier() {
-        Parser parser = createParser(SourceFileNames.MISSING_IDENTIFIER);
+        InfoTables tables = runParser(SourceFileNames.MISSING_IDENTIFIER);
 
         FileUtil.printSourceFile(SourceFileNames.MISSING_IDENTIFIER);
-        System.out.println(parser.getErrors());
+        System.out.println(tables.getParserErrors());
 
-        assertTrue(parser.getErrors().contains(ParserErrors.expectedIdentifier));
+        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedIdentifier));
     }
 
     @Test
     public void testMissingKeyword() {
-        Parser parser = createParser(SourceFileNames.MISSING_KEYWORD);
+        InfoTables tables = runParser(SourceFileNames.MISSING_KEYWORD);
 
         FileUtil.printSourceFile(SourceFileNames.MISSING_KEYWORD);
-        System.out.println(parser.getErrors());
+        System.out.println(tables.getParserErrors());
 
-        assertTrue(parser.getErrors().contains(ParserErrors.expectedKeyWord));
+        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedKeyWord));
     }
 
     @Test
     public void testMissingSemicolon() {
-        Parser parser = createParser(SourceFileNames.MISSING_SEMICOLON);
+        InfoTables tables = runParser(SourceFileNames.MISSING_SEMICOLON);
 
         FileUtil.printSourceFile(SourceFileNames.MISSING_SEMICOLON);
-        System.out.println(parser.getErrors());
+        System.out.println(tables.getParserErrors());
 
-        assertTrue(parser.getErrors().contains(ParserErrors.expectedSemicolon));
+        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedSemicolon));
     }
 
     @Test
     public void testWrongKeyword() {
-        Parser parser = createParser(SourceFileNames.WRONG_KEYWORD);
+        InfoTables tables = runParser(SourceFileNames.WRONG_KEYWORD);
 
         FileUtil.printSourceFile(SourceFileNames.MISSING_KEYWORD);
-        System.out.println(parser.getErrors());
+        System.out.println(tables.getParserErrors());
 
-        assertTrue(parser.getErrors().contains(ParserErrors.expectedProgramKeyword));
+        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedProgramKeyword));
     }
 }
