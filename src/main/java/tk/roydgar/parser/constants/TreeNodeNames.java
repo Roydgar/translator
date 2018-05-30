@@ -7,10 +7,13 @@ public interface TreeNodeNames {
     String BLOCK                = "<block>";
     String DECLARATIONS         = "<declarations>";
     String CONSTANT_DECLARATION = "<constant-declaration>";
+    String CONSTANT_DECLARATIONS = "<constant-declarations>";
     String CONSTANT             = "<constant>";
     String IDENTIFIER           = "<identifier>";
     String STATEMENT_LIST       = "<statement-list>";
     String EMPTY                = "<empty>";
     String CONSTANT_DECLAR_LIST = "<constant-declaration-list>";
     String CONSTANT_IDENTIFIER  = "<constant-identifier>";
+
+
 }

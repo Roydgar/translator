@@ -6,6 +6,7 @@ import tk.roydgar.parser.constants.DelimitersCodes;
 import tk.roydgar.parser.constants.IdentifierCodes;
 import tk.roydgar.parser.constants.KeywordCodes;
 import tk.roydgar.scanner.InfoTables;
+import tk.roydgar.scanner.constants.Delimiters;
 import tk.roydgar.scanner.constants.Keywords;
 
 import java.util.List;
@@ -33,21 +34,24 @@ public class Parser {
         tree = new Tree(infoTables.getOutputFileName());
     }
 
-
-    private void error(String expected) throws ParserErrorException{
+    private void error(String expected) {
         String errorMessage = String.format(ErrorMessages.FORMAT, expected, currentToken.name);
         errors.append(errorMessage);
         errorOccured = true;
-        throw new ParserErrorException();
+        throw new SyntaxErrorException();
     }
 
 
-    public InfoTables run() {
+    public String getErrors() {
+        return errors.toString();
+    }
 
+    public InfoTables run() {
         scanNextToken();
+
         try {
-            programBlock();
-        } catch (ParserErrorException e) {
+            signalProgram();
+        } catch (SyntaxErrorException syntaxError) {
             tree = new Tree();
             infoTables.setParserErrors(errors.toString());
             return infoTables;
@@ -55,55 +59,98 @@ public class Parser {
 
         tree.addTail();
         infoTables.setParserTree(tree);
-
         return infoTables;
     }
 
-    private void programBlock() throws ParserErrorException{
+    private void signalProgram() {
         program();
-        String identifier = identifier();
-        semicolon();
-
-        block();
-        tree.setProgramIdentifier(identifier);
     }
 
-    private void program() throws ParserErrorException{
+    private void program() {
+        programKeyword();
+        String programName = procedureIdentifier();
+        tree.setProgramIdentifier(programName);
+        semicolon();
+        block();
+        dot();
+    }
+
+    private void programKeyword() {
         if (currentToken.code == KeywordCodes.PROGRAM) {
             scanNextToken();
         } else {
-            error(ErrorMessages.PROGRAM);
+            error(Keywords.PROGRAM);
         }
     }
 
-    private String identifier() throws ParserErrorException{
-        if (currentToken.code >= IdentifierCodes.FROM && currentToken.code <= IdentifierCodes.TO) {
-            String identifier = currentToken.name;
-            scanNextToken();
-            return identifier;
-        } else {
-            error(ErrorMessages.IDENTIFIER);
-        }
-        return "";
+    private String procedureIdentifier() {
+        return identifier();
     }
 
-    private void semicolon() throws ParserErrorException{
+    private void semicolon() {
         if (currentToken.code == DelimitersCodes.SEMICOLON) {
             scanNextToken();
         } else {
-            error(ErrorMessages.SEMICOLON);
+            error(Delimiters.SEMICOLON);
         }
     }
 
-    private void declarations() throws ParserErrorException{
+    private void block() {
+        declarations();
+        beginKeyword();
+        statementList();
+        endKeyword();
+    }
+
+    private void beginKeyword() {
+        if (currentToken.code == KeywordCodes.BEGIN) {
+            scanNextToken();
+        } else {
+            System.out.println(currentToken);
+            error(Keywords.BEGIN);
+        }
+    }
+
+    private void endKeyword() {
+        if (currentToken.code == KeywordCodes.END) {
+            scanNextToken();
+        } else {
+            error(Keywords.END);
+        }
+    }
+
+
+    private void statementList() {
+        empty();
+    }
+
+
+    private void empty() {
+    }
+
+    private void dot() {
+        if (currentToken.code == DelimitersCodes.DOT) {
+            scanNextToken();
+        } else {
+            error(Delimiters.DOT);
+        }
+    }
+
+    private void declarations() {
+        constantDeclarations();
+    }
+
+    private void constantDeclarations() {
         boolean present = constKeyword();
-        if (! present) {
+
+        if (!present) {
             return;
         }
-        constantDeclarationList();
+
+        constantDeclarationsList();
     }
 
-    private boolean constKeyword() throws ParserErrorException{
+    private boolean constKeyword() {
         if (currentToken.code == KeywordCodes.CONST) {
             scanNextToken();
             return true;
@@ -111,81 +158,58 @@ public class Parser {
         return false;
     }
 
-    private void constantDeclarationList() throws ParserErrorException {
-        constantDeclaration();
-    }
-
-    private void constantDeclaration() throws ParserErrorException {
+    private void constantDeclarationsList() {
         if (currentToken.code == KeywordCodes.BEGIN) {
             return;
         }
 
-        String identifier = identifier();
-        equal();
-        String constant = unsignedConstant();
-        semicolon();
-
-        tree.addDeclaration(identifier, constant);
         constantDeclaration();
+        constantDeclarationsList();
     }
 
-    private void equal() throws ParserErrorException{
+    private void constantDeclaration() {
+        String identifier = constantIdentifier();
+        equals();
+        String value = constant();
+        semicolon();
+        tree.addDeclaration(identifier, value);
+    }
+
+    private String constantIdentifier() {
+        return identifier();
+    }
+
+    private void equals() {
         if (currentToken.code == DelimitersCodes.EQUALS) {
             scanNextToken();
         } else {
-            error(ErrorMessages.EQUAL);
+            error(Delimiters.EQUALS);
         }
     }
 
-    private String unsignedConstant() throws ParserErrorException{
+    private String constant() {
         if (currentToken.code >= ConstantCodes.FROM && currentToken.code <= ConstantCodes.TO) {
-            String constant = currentToken.name;
+            String value = currentToken.name;
             scanNextToken();
-            return constant;
+            return value;
         } else {
             error(ErrorMessages.UNSIGNED_CONSTANT);
         }
         return "";
     }
 
-    private void block() throws ParserErrorException{
-        declarations();
-        begin();
-        end();
-        dot();
-    }
-
-    private void begin() throws ParserErrorException{
-        if (currentToken.code == KeywordCodes.BEGIN) {
+    private String identifier() {
+        if (currentToken.code >= IdentifierCodes.FROM && currentToken.code <= IdentifierCodes.TO) {
+            String name = currentToken.name;
             scanNextToken();
+            return name;
         } else {
-            error(ErrorMessages.BEGIN);
+            error(ErrorMessages.IDENTIFIER);
         }
+        return "";
     }
 
-    private void end() throws ParserErrorException{
-        if (currentToken.code == KeywordCodes.END) {
-            scanNextToken();
-        } else {
-            error(ErrorMessages.END);
-        }
+    private class SyntaxErrorException extends RuntimeException {
     }
 
-    private void dot() throws ParserErrorException{
-        if (currentToken.code == DelimitersCodes.DOT) {
-        } else {
-            error(ErrorMessages.DOT);
-        }
-    }
-
-    public Tree getTree() {
-        return tree;
-    }
-
-    public String getErrors() {
-        return errors.toString();
-    }
-
-    class ParserErrorException extends Exception {
-    }
 }

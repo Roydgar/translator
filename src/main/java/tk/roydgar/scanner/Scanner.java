@@ -218,7 +218,6 @@ public class Scanner {
             }
 
             if (checkSigns  && !checkDigit){
-                System.out.println(symbol);
                 error = true;
             }
 

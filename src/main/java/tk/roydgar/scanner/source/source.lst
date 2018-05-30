@@ -3,8 +3,7 @@
 
 data SEGMENT
 
-height	EQU	'10#+3'
-width	EQU	'30#3'
+height	EQU	'+5#+3'
 
 data ENDS
 

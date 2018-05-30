@@ -13,9 +13,9 @@ import java.util.Map;
 
 public class CodeGenerator {
     private Tree tree;
-    FileWriter writer;
+    private FileWriter writer;
 
-    String listingFileName;
+    private String listingFileName;
 
     public CodeGenerator(InfoTables infoTables){
         if (infoTables.getParserTree().isEmpty()) {

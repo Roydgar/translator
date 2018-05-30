@@ -15,6 +15,7 @@ public class Tree {
     private int declarationCounter;
     private Map<String, String> declarations = new LinkedHashMap<>();
     private String outputFileName;
+    private boolean isEmpty;
 
     class Node {
         int prefix;
@@ -30,7 +31,7 @@ public class Tree {
 
     public Map<String , String> getDeclarations() { return declarations; }
 
-    public Tree() {};
+    public Tree() {isEmpty = true; };
 
     public Tree(String outputFileName) {
         tree.add(new Node(0, TreeNodeNames.SIGNAL_PROGRAM));
@@ -43,7 +44,9 @@ public class Tree {
         tree.add(new Node(8, TreeNodeNames.BLOCK));
 
         tree.add(new Node(12, TreeNodeNames.DECLARATIONS));
-        tree.add(new Node(16, TreeNodeNames.CONSTANT_DECLARATION));
+        tree.add(new Node(16, TreeNodeNames.CONSTANT_DECLARATIONS));
+
+        isEmpty = false;
         this.outputFileName = outputFileName;
     }
 
@@ -52,28 +55,28 @@ public class Tree {
     }
 
     public void addDeclaration(String identifier, String value) {
-        tree.add(new Node(20, Keywords.CONST.toUpperCase()));
-        tree.add(new Node(20, TreeNodeNames.CONSTANT_DECLAR_LIST));
+        if (declarationCounter == 0) {
+            tree.add(new Node(20, Keywords.CONST.toUpperCase()));
+            tree.add(new Node(20, TreeNodeNames.CONSTANT_DECLAR_LIST));
+        }
         tree.add(new Node(24, TreeNodeNames.CONSTANT_DECLARATION));
         tree.add(new Node(28, TreeNodeNames.CONSTANT_IDENTIFIER));
         tree.add(new Node(32, TreeNodeNames.IDENTIFIER));
         tree.add(new Node(36, identifier));
-        tree.add(new Node(28, TreeNodeNames.PROCEDURE_IDENTIFIER));
-        tree.add(new Node(28, Delimiters.EQUAL));
+        tree.add(new Node(28, Delimiters.EQUALS));
         tree.add(new Node(28, TreeNodeNames.CONSTANT));
         tree.add(new Node(32, value));
         tree.add(new Node(28, Delimiters.SEMICOLON));
 
         declarationCounter++;
         declarations.put(identifier, value);
-
     }
 
     public void addTail() {
         if (declarationCounter == 0) {
-            tree.add(new Node(20, TreeNodeNames.EMPTY));
-
+            tree.add(new Node(24, TreeNodeNames.EMPTY));
         }
+
         tree.add(new Node(12, Keywords.BEGIN.toUpperCase()));
         tree.add(new Node(12, TreeNodeNames.STATEMENT_LIST));
         tree.add(new Node(16, TreeNodeNames.EMPTY));
@@ -108,7 +111,7 @@ public class Tree {
         return sb.toString();
     }
 
-    public boolean isEmpty() { return tree.isEmpty(); }
+    public boolean isEmpty() { return isEmpty; }
 };
 
 

@@ -15,7 +15,6 @@ public class InfoTables {
     private int constLexCode = 500;                              //code of the last inserted constant token
     private int[] attributes;                                    //attributes table
 
-
     private String outputFileName;
     private String scannerErrors = "";
     private String parserErrors = "";
