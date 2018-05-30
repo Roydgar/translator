@@ -1,4 +1,4 @@
-package tk.roydgar.parser.constants;
+package tk.roydgar.scanner.constants;
 
 public interface IdentifierCodes {
     int FROM = 400;

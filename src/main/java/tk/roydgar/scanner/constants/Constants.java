@@ -1,7 +1,7 @@
 package tk.roydgar.scanner.constants;
 
 public interface Constants {
-    String SOURCE_FILE_NAME     = "src/main/java/tk/roydgar/scanner/source/source.signal";
+    String SOURCE_FILE_NAME     = "src/main/java/tk/roydgar/scanner/sourceCode/source.signal";
     String SOURCE_FILE_EXT      = ".signal";
     String LISTING_FILE_EXT     = ".out";
     int ASCII_TABLE_SIZE        = 128;

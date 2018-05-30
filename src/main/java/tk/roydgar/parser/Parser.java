@@ -1,9 +1,9 @@
 package tk.roydgar.parser;
 
 import tk.roydgar.parser.constants.*;
-import tk.roydgar.parser.constants.ConstantCodes;
-import tk.roydgar.parser.constants.DelimitersCodes;
-import tk.roydgar.parser.constants.IdentifierCodes;
+import tk.roydgar.scanner.constants.ConstantCodes;
+import tk.roydgar.scanner.constants.DelimitersCodes;
+import tk.roydgar.scanner.constants.IdentifierCodes;
 import tk.roydgar.parser.constants.KeywordCodes;
 import tk.roydgar.scanner.InfoTables;
 import tk.roydgar.scanner.constants.Delimiters;

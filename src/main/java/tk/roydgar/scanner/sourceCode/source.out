@@ -1,0 +1,24 @@
+   1    1        301    program
+   1    9        401    myprog
+   1   15          3    ;
+   5    1        302    begin
+   6    1        303    end
+   6    4          5    .
+
+Tree:
+<signal-program>
+    <program>
+        PROGRAM
+        <procedure-identifier>
+            <identifier>
+                myprog
+        ;
+        <block>
+            <declarations>
+                <constant-declarations>
+                        <empty>
+            BEGIN
+            <statement-list>
+                <empty>
+            END
+        .

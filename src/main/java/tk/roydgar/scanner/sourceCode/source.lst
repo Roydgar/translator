@@ -3,7 +3,6 @@
 
 data SEGMENT
 
-height	EQU	'+5#+3'
 
 data ENDS
 

@@ -13,5 +13,12 @@ public interface ErrorMessages {
     String IDENTIDIER_OR_BEG = "any identifier or begin";
     String UNSIGNED_CONSTANT = "any constant";
 
+    String expectedDot            = "expected: '.'";
+    String expectedIdentifier     = "expected: 'any identifier'";
+    String expectedKeyWord        = "expected: 'program'";
+    String expectedSemicolon      = "expected: ';'";
+    String expectedProgramKeyword = "expected: 'program'";
+
     String FORMAT            = "Parser error: expected: '%s', actual: '%s'.\n";
+
 }

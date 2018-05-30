@@ -1,7 +1,7 @@
 package tk.roydgar;
 
 import org.junit.Test;
-import tk.roydgar.parser.constants.ParserErrors;
+import tk.roydgar.parser.constants.ErrorMessages;
 import tk.roydgar.constants.SourceFileNames;
 import tk.roydgar.scanner.InfoTables;
 
@@ -22,30 +22,30 @@ public class ParserTest {
     @Test
     public void testMissingDot() {
         InfoTables tables = runParser(SourceFileNames.MISSING_DOT);
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedDot));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedDot));
     }
 
     @Test
     public void testMissingIdentifier() {
         InfoTables tables = runParser(SourceFileNames.MISSING_IDENTIFIER);
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedIdentifier));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedIdentifier));
     }
 
     @Test
     public void testMissingKeyword() {
         InfoTables tables = runParser(SourceFileNames.MISSING_KEYWORD);
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedKeyWord));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedKeyWord));
     }
 
     @Test
     public void testMissingSemicolon() {
         InfoTables tables = runParser(SourceFileNames.MISSING_SEMICOLON);
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedSemicolon));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedSemicolon));
     }
 
     @Test
     public void testWrongKeyword() {
         InfoTables tables = runParser(SourceFileNames.WRONG_KEYWORD);
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedProgramKeyword));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedProgramKeyword));
     }
 }

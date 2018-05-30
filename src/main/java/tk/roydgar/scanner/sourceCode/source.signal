@@ -1,7 +1,6 @@
 program myprog;
 
 (*****COMMENT*****)
-const height = +5#+3;
 
 begin
 end.

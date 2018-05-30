@@ -1,7 +1,7 @@
 package tk.roydgar;
 
 import org.junit.Test;
-import tk.roydgar.parser.constants.ParserErrors;
+import tk.roydgar.parser.constants.ErrorMessages;
 import tk.roydgar.constants.SourceFileNames;
 import tk.roydgar.scanner.InfoTables;
 import tk.roydgar.util.FileUtil;
@@ -27,7 +27,7 @@ public class ParserTestWithOutput {
         FileUtil.printSourceFile(SourceFileNames.MISSING_DOT);
         System.out.println(tables.getParserErrors());
 
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedDot));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedDot));
     }
 
     @Test
@@ -37,7 +37,7 @@ public class ParserTestWithOutput {
         FileUtil.printSourceFile(SourceFileNames.MISSING_IDENTIFIER);
         System.out.println(tables.getParserErrors());
 
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedIdentifier));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedIdentifier));
     }
 
     @Test
@@ -47,7 +47,7 @@ public class ParserTestWithOutput {
         FileUtil.printSourceFile(SourceFileNames.MISSING_KEYWORD);
         System.out.println(tables.getParserErrors());
 
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedKeyWord));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedKeyWord));
     }
 
     @Test
@@ -57,7 +57,7 @@ public class ParserTestWithOutput {
         FileUtil.printSourceFile(SourceFileNames.MISSING_SEMICOLON);
         System.out.println(tables.getParserErrors());
 
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedSemicolon));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedSemicolon));
     }
 
     @Test
@@ -67,6 +67,6 @@ public class ParserTestWithOutput {
         FileUtil.printSourceFile(SourceFileNames.MISSING_KEYWORD);
         System.out.println(tables.getParserErrors());
 
-        assertTrue(tables.getParserErrors().contains(ParserErrors.expectedProgramKeyword));
+        assertTrue(tables.getParserErrors().contains(ErrorMessages.expectedProgramKeyword));
     }
 }
