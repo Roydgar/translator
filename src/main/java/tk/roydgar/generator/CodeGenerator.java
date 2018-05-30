@@ -17,7 +17,7 @@ public class CodeGenerator {
 
     public CodeGenerator(InfoTables infoTables){
         if (infoTables.getParserTree().isEmpty()) {
-            throw new GeneratorEmptyTreeException();
+            throw new IllegalStateException("Parser tree is empty. Can't generate the code");
         }
 
         this.tree = infoTables.getParserTree();
