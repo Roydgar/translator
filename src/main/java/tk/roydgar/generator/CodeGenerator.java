@@ -38,8 +38,7 @@ public class CodeGenerator {
 
             for (Map.Entry<String, String> declaration : tree.getDeclarations().entrySet()) {
                 String converted = convert(declaration.getValue());
-                writer.append(String.format(ListingConstants.DECLARATION, declaration.getKey(),
-                       getDataType(converted), converted));
+                writer.append(String.format(ListingConstants.DECLARATION, declaration.getKey() , converted));
             }
             writer.append("\n");
 
