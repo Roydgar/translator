@@ -7,8 +7,8 @@ public interface ListingConstants {
     String PROG               = ";%s\n\n";
     String DATA_SEGMENT       = "data SEGMENT\n\n";
     String DATA_ENDS          = "data ENDS\n\n";
-    String DECLARATION        = "%s\tEQU\t'%s'\n";
-    String CONSTANT_DECLARATION  = "%s\tEQU\t'%s'\n";
+    String DECLARATION        = "%s\tEQU\t%s\n";
+    String CONSTANT_DECLARATION  = "%s\t%s\t%s\n";
 
     String BODY               = "code SEGMENT\n\t\tASSUME cs:code, ds:data\n\n" +
             "begin:\n" +
