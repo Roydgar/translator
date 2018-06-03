@@ -2,8 +2,8 @@ package tk.roydgar.generator.constants;
 
 public interface ListingConstants {
     String LST_FILE_EXTENSION = ".lst";
-    String SEPARATOR          = "----Code----\n";
     String EQU                = "EQU";
+    String VERSION            = ".386\n\n";
     String PROG               = ";%s\n\n";
     String DATA_SEGMENT       = "data SEGMENT\n\n";
     String DATA_ENDS          = "data ENDS\n\n";
@@ -22,4 +22,6 @@ public interface ListingConstants {
             "\tint 21h\n" +
             "code ENDS\n" +
             "\tEND begin";
+
+    String NUMBER_FORMAT_PATTERN = "#.#";
 }

@@ -28,9 +28,9 @@ public class CreatorUtil {
         } catch (IOException e) { throw new RuntimeException(e); }
     }
 
-    public static CodeGenerator createCodeGenerator(String sourceFileName) {
+    public static InfoTables createCodeGenerator(String sourceFileName) {
         try {
-            return new CodeGenerator(new Parser(new Scanner(sourceFileName).run()).run());
+            return new CodeGenerator(new Parser(new Scanner(sourceFileName).run()).run()).run();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }

@@ -14,5 +14,5 @@ public interface SourceFileNames {
     String MISSING_DOT              = "src\\test\\java\\tk\\roydgar\\sourse\\missingDot.signal";
     String MISSING_IDENTIFIER       = "src\\test\\java\\tk\\roydgar\\sourse\\missingIdentifier.signal";
     String WRONG_KEYWORD            = "src\\test\\java\\tk\\roydgar\\sourse\\wrongKeyword.signal";
-
+    String UNSUPPORTED_NUMBER_RANGE = "src\\test\\java\\tk\\roydgar\\sourse\\unsupportedNumberRange.signal";
 }

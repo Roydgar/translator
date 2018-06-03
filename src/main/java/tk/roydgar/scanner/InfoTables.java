@@ -18,6 +18,7 @@ public class InfoTables {
     private String outputFileName;
     private String scannerErrors = "";
     private String parserErrors = "";
+    private String generatorErrors = "";
     private Tree parserTree = new Tree();
 
     private List<Token> lexems = new ArrayList<>();
@@ -35,7 +36,7 @@ public class InfoTables {
         attributes[35] = ATTR_DELIMITER; attributes[46] = ATTR_DELIMITER;
         attributes[58] = ATTR_DELIMITER;
         attributes[40] = ATTR_COMMENT;
-        Arrays.fill(attributes, 48, 57, ATTR_CONST);
+        Arrays.fill(attributes, 48, 58, ATTR_CONST);
         Arrays.fill(attributes, 65, 123, ATTR_IDENTIFIER_KEYWORD);
 
         return attributes;
@@ -129,5 +130,13 @@ public class InfoTables {
 
     public void setParserTree(Tree parserTree) {
         this.parserTree = parserTree;
+    }
+
+    public String getGeneratorErrors() {
+        return generatorErrors;
+    }
+
+    public void setGeneratorErrors(String generatorErrors) {
+        this.generatorErrors = generatorErrors;
     }
 }

@@ -1,50 +1,16 @@
    1    1        301    program
-   1    9        401    myprog
-   1   15          3    ;
+   1    9        401    myprogram228
+   1   21          3    ;
    4    1        304    const
    4    7        402    weight
    4   14          0    =
-   4   16        501    3#-5
+   4   16        501    3#-7
    4   20          3    ;
    4   22        403    height
    4   29          0    =
-   4   31        502    5#1000
-   4   37          3    ;
-   5    1        302    begin
-   6    1        303    end
-   6    4          5    .
-
-Tree:
-<signal-program>
-    <program>
-        PROGRAM
-        <procedure-identifier>
-            <identifier>
-                myprog
-        ;
-        <block>
-            <declarations>
-                <constant-declarations>
-                    CONST
-                    <constant-declaration-list>
-                        <constant-declaration>
-                            <constant-identifier>
-                                <identifier>
-                                    weight
-                            =
-                            <constant>
-                                3#-5
-                            ;
-                        <constant-declaration>
-                            <constant-identifier>
-                                <identifier>
-                                    height
-                            =
-                            <constant>
-                                5#1000
-                            ;
-            BEGIN
-            <statement-list>
-                <empty>
-            END
-        .
+   4   31        502    -30#2
+   4   36          3    ;
+   6    1        302    begin
+   7    1        404    fsad
+   8    1        303    end
+   8    4          5    .

@@ -24,6 +24,10 @@ public class Translator {
         }
 
         new CodeGenerator(infoTables).run();
+
+        if (!infoTables.getGeneratorErrors().isEmpty()) {
+            throw new TranslatorException(infoTables.getGeneratorErrors());
+        }
     }
 
     public static void main(String[] args){

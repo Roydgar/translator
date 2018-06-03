@@ -3,9 +3,9 @@
 
 data SEGMENT
 
-ident1	EQU	'10#-2'
-ident2	EQU	'30'
-ident3	EQU	'-30#2'
+ident1	DQ	0.1
+ident2	DB	30
+ident3	DW	-3000
 
 data ENDS
 
